@@ -9,25 +9,28 @@ function VideoList({ videos, emptyHeading }) {
     heading = count + ' ' + noun;
   }
   return (
-    <section>
+    <section className="VideoList">
       <h2>{heading}</h2>
-      {videos.map(video =>
-        <div key={video.id} className="mb-4">
-          <h3>{video.title}</h3>
-          <div className="embed-responsive embed-responsive-16by9">
-            <iframe
-              className="embed-responsive-item"
-              src={video.url}
-              allowFullScreen
-              title={video.title}
-            ></iframe>
+      {videos.length > 0 ? (
+        videos.map(video =>
+          <div key={video.id} className="VideoItem">
+            <h3>{video.title}</h3>
+            <div className="embed-responsive embed-responsive-16by9">
+              <iframe
+                className="VideoFrame"
+                src={video.url}
+                allowFullScreen
+                title={video.title}
+              ></iframe>
+            </div>
           </div>
-        </div>
+        )
+      ) : (
+        <h3 className="EmptyHeading">{emptyHeading}</h3>
       )}
     </section>
   );
 }
-
 function App() {
   const videos = [
     { id: 1, title: 'Guns N\' Roses - Sweet Child O\' Mine', url: 'https://www.youtube.com/embed/1w7OgIMMRc4' },
